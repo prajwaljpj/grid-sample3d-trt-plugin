@@ -19,10 +19,12 @@ file(GLOB SOURCES "./src/*.cpp")
 file(GLOB CU_SOURCE "./src/*.cu")
 
 message(STATUS "CUDAToolkit_INCLUDE_DIRS: ${CUDAToolkit_INCLUDE_DIRS}")
+message(STATUS "TensorRT_INCLUDE_DIR: ${TensorRT_INCLUDE_DIR}")
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${CU_SOURCE})
 
-target_include_directories(${PROJECT_NAME} PRIVATE "./src" ${CUDAToolkit_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE "./src" ${CUDAToolkit_INCLUDE_DIRS} ${TensorRT_INCLUDE_DIR})
+target_link_directories(${PROJECT_NAME} PRIVATE ${TensorRT_LIB_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE nvinfer)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_ARCHITECTURES "70;80;86;89")

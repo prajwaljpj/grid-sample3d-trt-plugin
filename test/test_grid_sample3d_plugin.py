@@ -151,7 +151,7 @@ if __name__ == "__main__":
     context = engine.create_execution_context()
 
     output = inference(engine, context, inputs)
-    output = output["(Unnamed Layer* 0) [PluginV2DynamicExt]_output_0"]
+    output = output["(Unnamed Layer* 0) [PluginV2DynamicExt]_output"]
     # print(output_ref)
     diff = (output - output_ref)
     max_index = np.unravel_index(diff.argmax(), diff.shape)
